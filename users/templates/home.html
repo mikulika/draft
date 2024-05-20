@@ -1,0 +1,184 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="description" content="WebUni Education Template">
+    <meta name="keywords" content="webuni, education, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maktab</title>
+    	<!-- Favicon -->
+	  <link href="{% static 'webuni/img/favicon.png' %}" rel="shortcut icon"/>
+
+    	<!-- Google Fonts -->
+	  <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+      
+      <!--Stylesheets-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/sketchy/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  </head>
+  <body>
+    <!-- As a heading -->
+  <nav class="navbar" style="background-image: url('{% static 'img/homeback.png' %}'); background-size: cover; background-position: center; height: 400px;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'img/logo.png' %}" height="30" width="30" class="d-inline-block align-top" alt=""> MAKTAB</a>
+    </div>
+    <span class="slogan" style="margin-top: 20px;">
+      <span class=" line display-1" style="color: white; padding: 100px;">INNOVATIVE</span><br>
+      <span class=" line display-1" style="color: rgb(255, 217, 93); padding: 100px;">LEARNING</span><br>
+    </span>
+    <div class="container-fluid" style="margin-right: 750px; margin-left: 100px;">
+      <a class ="nav-item nav-link" href="{% url 'home' %}" style="color: white;">Home</a>
+      <a class ="nav-item nav-link" href="{% url 'about' %}" style="color: white;">About us</a>
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">Courses</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'index' %}">Create</a>
+          <a class="dropdown-item" href="{% static 'webuni/courses.html' %}">Discover</a>
+        </div>
+      </div>  
+      <a class ="nav-item nav-link" href="{% url 'contact' %}" style="color: white;">Contact</a>
+      <!-- Dropdown -->
+      {% if request.user.is_authenticated %}
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+         Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         <a class="dropdown-item" href="{% url 'users:profile' %}">Profile</a>
+          <a class="dropdown-item" href="{% url 'users:edit_profile' %}">Settings</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href={% url 'users:logout_user' %}>Logout</a>
+      </div>
+    </div>
+    {% else %}
+    {% endif %}
+  </div>
+
+    </div>  
+  </nav>
+  
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message:</strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    </button>    
+    <span aria-hidden="true">&times;</span>
+  </div>
+  {% endfor %}
+  <div class="container-fluid">
+    {% if request.user.is_authenticated %}
+    <h6 class="text-center" style="color: black;">You are already logged in</h6>
+    <div style="margin-left: 40%;">
+      <a href={% url 'users:profile' %} type="button" class="btn btn-info btn-lg" style="border:grey;">Go To Profile</a>
+      <a href={% url 'users:logout_user' %} type="button" class="btn btn-danger btn-lg">Log Out</a>
+    </div>
+  {% else %}
+  <div style="padding-left: 90px; display: flex; justify-content: center; margin: 50px; padding: 10px;">
+  <a href={% url 'users:register' %} type="button" class="text-center btn btn-danger navbar-btn" style="border-radius: 20px; padding: 15px 30px; font-size: 20px; margin-right: 10px;">SIGN UP</a>
+  <a href={% url 'users:login' %} type="button" class="text-center btn btn-danger navbar-btn" style="border-radius: 20px; padding: 15px 30px; font-size: 20px; margin-left: 10px;">LOG IN</a>
+  </div>
+  <body>
+    {% endif %}
+      <!-- First Body -->
+
+    <div class="container" style="display: flex; align-items: center;">
+      <div class="row">
+          <img src="{% static 'img/girl1.png' %}" alt="">
+        </div>
+        <div class="col-md-6">
+          <h2 style="color:black; font-weight: bold;">ABOUT THIS APPLICATION</h2>
+          <p style="color:black;">Maktab is your one-stop destination for personalized learning tailored to your academic journey. With Maktab, students can seamlessly navigate through a variety of school subjects, selecting their grade level and desired subjects to embark on an enriching learning experience.</p>
+          <p style="color:black;">From mathematics to literature, science to history, Maktab offers a comprehensive array of courses aligned with the Uzbekistan curriculum. With just a few clicks, students can choose their grade and subject, unlocking a wealth of resources, interactive lessons, and practice exercises designed to enhance their understanding and mastery of key concepts.</p>
+          <a href="{% url 'users:register' %}" class="btn btn-danger" style="border-radius: 20px; padding: 10px 30px; font-size: 20px;">START LEARNING TODAY</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ICONS -->
+
+    <div class="icon-container" style="display: flex; justify-content: center; margin-top: 50px;">
+      <div class="icon" style="color: black; text-align: center; margin: 0 50px;">
+        <i class="fas fa-book" style="font-size: 48px;"></i>
+        <h6 style="margin-top: 10px; color: rgb(236, 34, 34); font-weight: bold;">ENGLISH</h6>
+      </div>
+      <div class="icon" style="color: black; text-align: center; margin: 0 50px;">
+        <i class="fa fa-calculator" style="font-size: 48px;"></i>
+        <h6 style="margin-top: 10px; color: rgb(236, 34, 34); font-weight: bold;">MATH</h6>
+      </div>
+      <div class="icon" style="color: black; text-align: center; margin: 0 50px;">
+        <i class="fas fa-flask" style="font-size: 48px;"></i>
+        <h6 style="margin-top: 10px; color: rgb(236, 34, 34); font-weight: bold;">SCIENCE</h6>
+      </div>
+    </div>
+
+    <!-- Second body -->
+
+    <div class="container" style="display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center;">
+      <div class="image" style="flex: 1;">
+        <img src="{% static 'img/girl2.png' %}" style="max-width:100%; display: block;" alt="">
+      </div>
+      <div class="text" style="flex: 1; padding: 0 20px;">
+        <h2 style="color:black; font-weight: bold;">GRADES</h2>
+        <p style="color: black; font-weight: bold;">The first step to start learning on this website is by choosing your grade. The lessons and exercises will be categorized by your level in school.</p>
+        <a href="{% url 'users:register' %}" class="btn btn-danger" style="border-radius: 20px; padding: 10px 30px; font-size: 20px;">CHOOSE YOUR GRADE</a>
+      </div>
+    </div>
+
+     <!-- Third body -->
+
+     <div class="container" style="display: flex; align-items: center; margin-bottom: 100px;">
+      <div class="row" style="flex: 1;">
+          <img src="{% static 'img/boy1.png' %}" alt="">
+        </div>
+        <div class="col-md-6">
+          <h2 style="color:black; font-weight: bold;">COURSES & LESSONS</h2>
+          <p style="color:black;">We have variety of courses and lessons you can choose from. Our lessons align with the lessons in your schools. This will be a great tool for you to improve your education.</p>
+          <a href="{% url 'users:register' %}" class="btn btn-danger" style="border-radius: 20px; padding: 10px 30px; font-size: 20px;">START LEARNING TODAY</a>
+        </div>
+      </div>
+    </div>
+
+  </body>
+  </div>
+  <!-- Footer Section -->
+  <div class="blockcode">
+    <footer class="page-footer navbar shadow" style="background-color: #ffa841; color: white;">
+      <div class="d-flex flex-column mx-auto py-5" style="width: 80%">
+        <div class="d-flex flex-wrap justify-content-between">
+            <div>
+              <p class="my-3 line display-3" href="{% url 'users:register' %}" type="button">
+              START LEARNING
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="my-3 line display-3" style="color:rgb(245, 193, 60);">
+                TODAY
+                </p>
+                  <span class="mt-4 ml-auto" style="margin-left: 600px;">
+                    <button class="btn btn-flat p-2" style="color:white; background-color:transparent; border-color: transparent;">
+                    <i class="fab fa-telegram fa-2x"></i>
+                    </button>
+                    <button class="btn btn-flat p-2" style="color:white; background-color:transparent; border-color: transparent;">
+                      <i class="fab fa-facebook fa-2x"></i>
+                    </button>
+                    <button class="btn btn-flat p-2" style="color:white; background-color:transparent; border-color: transparent;">
+                      <i class="fab fa-youtube fa-2x"></i>
+                    </button>
+                  </span>
+              </div>
+              <h6 class="mt-5">
+                <i class="fas fa-envelope"></i> malika.butaboeva@gmail.com
+              </h6>
+            </div>
+      </footer>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
